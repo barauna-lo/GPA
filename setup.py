@@ -5,7 +5,7 @@ from Cython.Build import cythonize
 import numpy
 
 setup(name="GPA",
-      version="3.5",
+      version="3.6",
       ext_modules=cythonize("*.pyx"),
       author='Rubens Andreas Sautter',
       author_email='rubens.sautter@gmail.com',

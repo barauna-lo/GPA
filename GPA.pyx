@@ -415,7 +415,8 @@ cdef class GPA:
 				if targetMat[i,j] > 0:
 					if self.mods[i,j] > 1e-6:
 						z = self.mods[i,j]*numpy.exp(1j*self.phases[i,j])/sumZ
-						self.G4 = self.G4 - z*numpy.log(z)
+						self.G4 = self.G4 + z*numpy.log(z)
+		self.G4 = numpy.real(numpy.abs(self.G4))
 		return self.G4
 
 	@cython.boundscheck(False)
@@ -467,7 +468,7 @@ cdef class GPA:
 		for gmoment in moment:
 			if("G4" == gmoment):
 				self._G4(symmetrycalGrad)
-				retorno["G4"] = self.G4
+				retorno["G4"] = numpy.real(self.G4)
 			if("G3" == gmoment):
 				self._G3(symmetrycalGrad)
 				retorno["G3"] = self.G3
